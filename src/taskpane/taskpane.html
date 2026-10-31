@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ToneFlags</title>
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 16px; margin: 0; background-color: #f8fafc; color: #1e293b; }
+        h2 { font-size: 16px; font-weight: 700; margin-top: 0; margin-bottom: 4px; color: #0f172a; }
+        p { font-size: 12px; color: #64748b; margin-bottom: 16px; line-height: 1.4; }
+        .category-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #94a3b8; margin: 12px 0 6px 0; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .btn {
+            padding: 10px 8px; font-size: 12px; font-weight: 600; border: 1px solid #e2e8f0;
+            border-radius: 8px; background: #ffffff; cursor: pointer; transition: all 0.15s ease-in-out;
+            display: flex; align-items: center; justify-content: flex-start; gap: 8px; color: #334155;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .btn:hover { background: #f1f5f9; border-color: #cbd5e1; }
+        .btn.selected { background: #e0e7ff; border-color: #6366f1; color: #3730a3; }
+        .action-btn {
+            width: 100%; margin-top: 20px; padding: 12px; font-size: 13px; font-weight: 700;
+            color: #ffffff; background-color: #4f46e5; border: none; border-radius: 8px; cursor: pointer;
+            box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2); transition: background-color 0.15s;
+        }
+        .action-btn:hover { background-color: #4338ca; }
+        #status { margin-top: 12px; font-size: 12px; color: #059669; font-weight: 600; text-align: center; min-height: 18px; }
+    </style>
+</head>
+<body>
+    <h2>ToneFlags</h2>
+    <p>Select ToneFlags to add a visual header to your message body to make your tone and intent clear:</p>
+
+    <div class="category-title">Context & Pace</div>
+    <div class="grid">
+        <button class="btn" onclick="toggleTone(this, 'Rushed', '#ef4444')">⚡ Rushed</button>
+        <button class="btn" onclick="toggleTone(this, 'Direct', '#64748b')">🎯 Direct</button>
+    </div>
+
+    <div class="category-title">Nuance & Humour</div>
+    <div class="grid">
+        <button class="btn" onclick="toggleTone(this, 'Banter', '#3b82f6')">😜 Banter</button>
+        <button class="btn" onclick="toggleTone(this, 'Playful', '#06b6d4')">✨ Playful</button>
+        <button class="btn" onclick="toggleTone(this, 'Sarcasm', '#8b5cf6')">🙃 Sarcasm</button>
+        <button class="btn" onclick="toggleTone(this, 'Serious', '#475569')">🛡️ Serious</button>
+    </div>
+
+    <div class="category-title">Relational & State</div>
+    <div class="grid">
+        <button class="btn" onclick="toggleTone(this, 'Warm', '#10b981')">💛 Warm</button>
+        <button class="btn" onclick="toggleTone(this, 'Reassurance', '#059669')">💚 Reassurance</button>
+        <button class="btn" onclick="toggleTone(this, 'Encouragement', '#f59e0b')">🚀 Encouragement</button>
+        <button class="btn" onclick="toggleTone(this, 'Venting', '#f97316')">💢 Venting</button>
+        <button class="btn" onclick="toggleTone(this, 'Concerned', '#a855f7')">😟 Concerned</button>
+        <button class="btn" onclick="toggleTone(this, 'Idea Only', '#0ea5e9')">🧭 Idea Only</button>
+    </div>
+
+    <button class="action-btn" onclick="insertToneHeader()">Insert Tone Banner</button>
+    
+    <div id="status"></div>
+
+    <script src="taskpane.js" type="text/javascript"></script>
+</body>
+</html>
