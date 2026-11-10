@@ -3,24 +3,26 @@
     xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xmlns:bt="http://schemas.microsoft.com/office/officeapptypes/1.0" 
+    xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides"
     xsi:type="MailApp">
 
   <Id>632887d0-8c89-4690-9aa8-17326456c682</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>ToneFlags</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="ToneFlags" />
-  <Description DefaultValue="Neuroinclusive tone indicator add-in for Outlook." />
+  <DisplayName DefaultValue="ToneFlags"/>
+  <Description DefaultValue="Neuroinclusive tone indicator add-in for Outlook."/>
   <IconUrl DefaultValue="https://toneflags.vercel.app/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://toneflags.vercel.app/assets/icon-80.png"/>
+  <SupportUrl DefaultValue="https://toneflags.vercel.app"/>
 
   <Hosts>
-    <Host Name="MailApp" />
+    <Host Name="MailApp"/>
   </Hosts>
 
   <Requirements>
     <Sets DefaultMinVersion="1.1">
-      <Set Name="Mailbox" />
+      <Set Name="Mailbox"/>
     </Sets>
   </Requirements>
 
@@ -35,6 +37,67 @@
   <Permissions>ReadWriteMailbox</Permissions>
 
   <Rule xsi:type="RuleCollection" Mode="Or">
-    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit" />
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit"/>
   </Rule>
+
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Requirements>
+      <bt:Sets DefaultMinVersion="1.1">
+        <bt:Set Name="Mailbox"/>
+      </bt:Sets>
+    </Requirements>
+    <Hosts>
+      <Host xsi:type="MailHost">
+        <DesktopFormSettings>
+          <SourceLocation resid="Taskpane.Url"/>
+        </DesktopFormSettings>
+        <ItemIs FormType="Edit" ItemType="Message">
+          <Desktop>
+            <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+              <OfficeTab id="TabDefault">
+                <Group id="ToneFlagsGroup">
+                  <Label resid="GroupLabel"/>
+                  <Control xsi:type="Button" id="TaskpaneButton">
+                    <Label resid="ButtonLabel"/>
+                    <Supertip>
+                      <Title resid="ButtonTitle"/>
+                      <Description resid="ButtonDesc"/>
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon16"/>
+                      <bt:Image size="32" resid="Icon32"/>
+                      <bt:Image size="80" resid="Icon80"/>
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <SourceLocation resid="Taskpane.Url"/>
+                    </Action>
+                  </Control>
+                </Group>
+              </OfficeTab>
+            </ExtensionPoint>
+          </Desktop>
+        </ItemIs>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon16" DefaultValue="https://toneflags.vercel.app/assets/icon-32.png"/>
+        <bt:Image id="Icon32" DefaultValue="https://toneflags.vercel.app/assets/icon-32.png"/>
+        <bt:Image id="Icon80" DefaultValue="https://toneflags.vercel.app/assets/icon-80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://toneflags.vercel.app/taskpane.html"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="GroupLabel" DefaultValue="ToneFlags"/>
+        <bt:String id="ButtonLabel" DefaultValue="ToneFlags"/>
+        <bt:String id="ButtonTitle" DefaultValue="Open ToneFlags"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="ButtonDesc" DefaultValue="Open the ToneFlags taskpane to add tone indicators to your email."/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
 </OfficeApp>
